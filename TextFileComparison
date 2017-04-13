@@ -1,0 +1,64 @@
+package textreader;
+
+	import java.io.BufferedReader;
+	import java.io.BufferedWriter;
+	import java.io.FileReader;
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.util.ArrayList;
+
+
+	public class TextFileComparison {
+
+		public static void main(String[] args){  
+			try {
+				//First file
+				FileReader fr= new FileReader("D:/eclipse Kepler/Task assigning/no duplicate.txt");
+				BufferedReader reader1 = new BufferedReader(fr);
+				
+				//Second file
+				FileReader fr1=new FileReader("D:/eclipse Kepler/Task assigning/VDP.txt");
+				BufferedReader reader2 = new BufferedReader(fr1);
+				
+				//Third file
+				FileWriter fw =new FileWriter("D:/eclipse Kepler/Task assigning/No Of incidents.txt");
+				BufferedWriter writer = new BufferedWriter(fw);
+				
+				String line1;
+				String line2;
+				
+				ArrayList<String> list1 = new ArrayList<String>();
+				ArrayList<String> list2 = new ArrayList<String>();
+				
+				while ((line1 = reader1.readLine()) != null) {
+					list1.add(line1);
+				}
+				
+				while((line2 = reader2.readLine()) != null){
+					list2.add(line2);
+				}
+				
+				reader1.close();
+				reader2.close();
+				int k = 0;
+				
+				for (int i = 0; i < list2.size()-1; i++) {
+					if (!list1.contains(list2.get(i))) {
+						k++;
+						writer.write(list2.get(i));
+						writer.newLine();
+					}
+				}
+			
+				writer.close();
+				System.out.println("Number of duplicates: "+k);
+				
+			} catch (IOException e) {
+			
+				System.out.println("File not found");
+			}
+			
+		}
+
+	}
+
